@@ -10,6 +10,10 @@ import com.hrup.academicbutlersystem.pojo.User;
 import com.hrup.academicbutlersystem.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 实现登录登出以及令牌验证功能的实现类
  *
@@ -22,6 +26,7 @@ public class AuthServiceImpl implements AuthService {
     private StudentMapper studentMapper;
     @Autowired
     private JWTUtils jwtUtils;
+
 //    @Autowired
 //    private AdminMapper adminMapper;
 
@@ -57,10 +62,13 @@ public class AuthServiceImpl implements AuthService {
         return null;
     }
 
+    //登出时把令牌加入黑名单实现简单的登录功能
     @Override
-    public void logout() {
-
+    public void logout(String token) {
+        jwtUtils.invalidateToken(token);
     }
+
+
 
 
     /**
