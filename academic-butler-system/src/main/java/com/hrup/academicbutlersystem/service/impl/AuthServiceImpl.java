@@ -1,6 +1,7 @@
 package com.hrup.academicbutlersystem.service.impl;
 
 import com.hrup.academicbutlersystem.config.JWTUtils;
+import com.hrup.academicbutlersystem.exception.BusinessException;
 import com.hrup.academicbutlersystem.mapper.CourseMapper;
 import com.hrup.academicbutlersystem.mapper.StudentMapper;
 import com.hrup.academicbutlersystem.mapper.TeacherMapper;
@@ -54,6 +55,14 @@ public class AuthServiceImpl implements AuthService {
                     user = student;
                 }
                 break;
+            default:
+                throw new BusinessException("角色错误");
+        }
+        if (user == null){
+            throw new BusinessException("用户名或密码错误");
+        }
+        if (user.getStatus() == 1){
+            throw new BusinessException("用户被禁用");
         }
         //验证通过后生成JWT令牌
         if (user != null){
