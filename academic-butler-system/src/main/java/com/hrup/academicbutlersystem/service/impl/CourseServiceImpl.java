@@ -1,5 +1,6 @@
 package com.hrup.academicbutlersystem.service.impl;
 
+import com.hrup.academicbutlersystem.exception.BusinessException;
 import com.hrup.academicbutlersystem.mapper.CourseMapper;
 import com.hrup.academicbutlersystem.pojo.Course;
 import com.hrup.academicbutlersystem.service.CourseService;
@@ -93,7 +94,7 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseMapper.selectById(courseId);
         /** 课程状态(1-已提交,2-审核通过,3-审核不通过,4-公开,5-隐藏) */
         if (course == null || course.getStatus() != 4){
-            //抛出课程不可选择异常
+            throw new BusinessException("课程不可选择");//抛出课程不可选择异常
         }
         //根据学生id和课程id插入相应课程进入学生课表中
         courseMapper.insertStudentCourse(studentId, courseId);

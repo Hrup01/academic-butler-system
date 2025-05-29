@@ -1,5 +1,6 @@
 package com.hrup.academicbutlersystem.service.impl;
 
+import com.hrup.academicbutlersystem.exception.BusinessException;
 import com.hrup.academicbutlersystem.mapper.CourseMapper;
 import com.hrup.academicbutlersystem.mapper.TeacherMapper;
 import com.hrup.academicbutlersystem.pojo.Course;
@@ -27,7 +28,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher getprofile(Long id) {
         Teacher teacher = teacherMapper.selectById(id);
         if (teacher == null){
-
+            throw new BusinessException("教师不存在");
         }
         return teacher;
     }

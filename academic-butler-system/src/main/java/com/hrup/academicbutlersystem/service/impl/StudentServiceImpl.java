@@ -1,5 +1,6 @@
 package com.hrup.academicbutlersystem.service.impl;
 
+import com.hrup.academicbutlersystem.exception.BusinessException;
 import com.hrup.academicbutlersystem.mapper.CourseMapper;
 import com.hrup.academicbutlersystem.mapper.StudentMapper;
 import com.hrup.academicbutlersystem.pojo.Course;
@@ -22,7 +23,7 @@ public class StudentServiceImpl implements StudentService {
     public Student getStudentById(Long id) {
         Student student = studentMapper.selectById(id);
         if (student == null){
-            //抛出异常
+            throw new BusinessException("学生不存在");//抛出异常
         }
         return student;
     }
