@@ -90,6 +90,7 @@ public class CourseServiceImpl implements CourseService {
         //判断课程是否已经被选择
         if (courseMapper.countStudentCourse(studentId, courseId) > 0){
             //已被选择
+            throw new BusinessException("该课程已经被选择");
         }
         Course course = courseMapper.selectById(courseId);
         /** 课程状态(1-已提交,2-审核通过,3-审核不通过,4-公开,5-隐藏) */
