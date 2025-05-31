@@ -41,7 +41,7 @@ public class StudentController {
      * 查询课表
      * */
     @GetMapping("/{studentId}/courses")
-    public  Result<List<Course>> getMyCourses(@RequestBody Long studentId){
+    public  Result<List<Course>> getMyCourses(@PathVariable Long studentId){
         List<Course> courses = studentService.getMyCourses(studentId);
         return Result.success(courses);
     }
