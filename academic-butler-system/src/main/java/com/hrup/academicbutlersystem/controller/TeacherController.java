@@ -51,7 +51,8 @@ public class TeacherController {
     /**
      * 申请课程状态改变
      * */
-    public Result<String> applyCourseStatusChange(@RequestBody Long courseId,@RequestBody Integer newStatus){
+    @GetMapping("/applyCourseStatusChange/{courseId}/{newStatus}")
+    public Result<String> applyCourseStatusChange(@PathVariable Long courseId,@PathVariable Integer newStatus){
         teacherService.applyCourseStatusChange(courseId,newStatus);
         return Result.success("课程状态改变申请已提交");
     }
