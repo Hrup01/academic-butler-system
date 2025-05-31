@@ -69,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
      * */
     @Override
     public List<Course> getCoursesByTeacherId(Long teacherId) {
-        return List.of();
+        return courseMapper.selectByTeacherId(teacherId);
     }
 
     /**
@@ -78,7 +78,7 @@ public class CourseServiceImpl implements CourseService {
      * */
     @Override
     public List<Course> getCoursesByStudentId(Long studentId) {
-        return List.of();
+        return courseMapper.selectByStudentId(studentId);
     }
 
     /**
