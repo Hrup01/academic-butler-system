@@ -43,12 +43,18 @@ public class AuthServiceImpl implements AuthService {
         User user = null;
         switch (role) {
             case "TEACHER":
+                if (! username.matches("\\d{2}\\d{3}\\d{4}")){
+                    return null;
+                }
                 Teacher teacher = teacherMapper.selectByUsername(username);
                 if (teacher != null && teacher.getPassword().equals(password)){
                     user = teacher;
                 }
                 break;
             case "STUDENT":
+                if (!username.matches("\\d{2}\\d{3}\\d{2}\\d{1,2}\\d{2}")) {
+                    return null;
+                }
                 user = studentMapper.selectByUsername(username);
                 Student student = studentMapper.selectByUsername(username);
                 if (student != null && student.getPassword().equals(password)){
