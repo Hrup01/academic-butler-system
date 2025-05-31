@@ -43,4 +43,21 @@ public class StudentServiceImpl implements StudentService {
         List<Course> studentCourses = courseMapper.selectByStudentId(studentId);
         return studentCourses;
     }
+
+    /**
+     * 根据学生id和课程id来进行选课
+     * */
+    @Override
+    public void selectCourse(Long studentId, Long courseId) {
+        if (courseMapper.countStudentCourse( studentId, courseId) > 0){
+            throw new BusinessException("该课程已经被选择");
+        }
+        Course course = courseMapper.selectById(courseId);
+         /** 课程状态(1-已提交,2-审核通过,3-审核不通过,4-公开,5-隐藏) */
+          if (course == null || course.getStatus() != 4){
+               throw new BusinessException("课程不可选择");//抛出课程不可选择异常
+          }
+           //根据学生id和课程id插入相应课程进入学生课表中
+         courseMapper.insertStudentCourse(studentId, courseId);
+    }
 }
