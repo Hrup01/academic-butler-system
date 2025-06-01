@@ -36,13 +36,6 @@ public class Result<T> {
     public static final Integer ERROR = 500;
 
     /**
-     * 私有构造方法
-     */
-    private Result() {
-        this.timestamp = System.currentTimeMillis();
-    }
-
-    /**
      * 成功响应
      */
     public static <T> Result<T> success() {
